@@ -1,62 +1,88 @@
 
-// function getArrayLength(arr: number[] | string[] | boolean[]): number{
-//   return arr.length;
+
+// // Partial
+// interface Address {
+//   email: string;
+//   address: string;
 // }
 
-// function getArrayLength<T>(arr: T[]): number{
-//   return arr.length;
+// const me: Partial<Address> = {};
+// const you: Partial<Address> = { email: 'john@abc.com' };
+// const all: Address = { email: 'john@abc.com', address: 'john' }
+
+
+// // Pick
+
+// // interface Todo {
+// //   title: string,
+// //   desc: string,
+// //   completed: boolean;
+// // }
+
+// // type TodoPreview = Pick<Todo, "title" | "completed">
+
+// // const todo: TodoPreview = {
+// //   title: "clean Room",
+// //   completed: false
+// // }
+
+
+// // Omit 생략하다는 뜻
+
+// interface Todo {
+//   title: string;
+//   desc: string;
+//   completed: boolean;
+//   createdAt: number;
 // }
 
-// const array1 = [1,2,3];
-// const array2 = ['a','b','c'];
-// const array3 = [true, false, true];
+// type TodoPreview = Omit<Todo, "desc">
 
-// getArrayLength<number>(array1);
-// getArrayLength<string>(array2);
-// getArrayLength<boolean>(array3);
-
-
-// interface Vehicle<T> {
-//   name: string;
-//   color: string;
-//   option: T;
+// const todo: TodoPreview = {
+//   title: 'clean room',
+//   completed: false,
+//   createdAt: 123455
 // }
 
-// const car:Vehicle<{price: number}> = {
-//   name: 'car',
-//   color: 'red',
-//   option: {
-//     price: 1000
-//   }
+// // Required
+
+// // type User = {
+// //   firstName: string,
+// //   lastName?: string
+// // }
+
+// // let firstUser: User = {
+// //   firstName: "John"
+// // }
+
+// // let secondUser: Required<User> = {
+// //   firstName: 'John'
+// // }
+
+
+// // Record
+
+// interface CatInfo {
+//   age: number;
+//   breed: string;
 // }
 
-// const bike:Vehicle<boolean> = {
-//   name: 'bike',
-//   color: 'green',
-//   option: true
+// type CatName = "miffy" | "boris" | "mordred"
+
+// const cats: Record<CatName, CatInfo> = {
+//   miffy: {age: 10, breed: 'persian'},
+//   boris: {age: 5, breed: 'maine coon'},
+//   mordred: {age: 16, breed: 'british shorthair'},
 // }
 
+// // ReturnType
 
+// type T0 = ReturnType<()=>string>
+// type T1 = ReturnType<(s: string) => void>
 
-const makeArr1 = <T, Y>(x:T,y:Y): [T,Y] => {
-  return [x,y];
-}
+// function fn(str: string){
+//   return str;
+// }
 
-const array = makeArr1<number, number>(4,5);
-const array2 = makeArr1<string, string>('a','c');
-
-
-const makeArr2 = <T, Y = string>(x:T,y:Y): [T,Y] => {
-  return [x,y];
-}
-
-const array3 = makeArr2<string>('a','c');
-
-const makeFullName = <T extends {firstName: string, lastName: string}>(obj: T) => {
-  return {
-    ...obj,
-    fullName: obj.firstName + " " + obj.lastName
-  }
-}
-
-makeFullName({firstName: 'John', lastName: 'joe', location: 'Seoul'});
+// const a: ReturnType<typeof fn> = 'Hello';
+// const b: ReturnType<typeof fn> = true;
